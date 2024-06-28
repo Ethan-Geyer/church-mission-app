@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Graph</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Activity Graph</h1>
+    <canvas id="activityGraph" width="800" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('activityGraph');
+        const ctx = canvas.getContext('2d');
+
+        // Sample data
+        const activityData = [
+            { date: '2024-06-18', hours: 5 },
+            { date: '2024-06-19', hours: 7 },
+            { date: '2024-06-20', hours: 8 },
+            { date: '2024-06-21', hours: 6 },
+            { date: '2024-06-22', hours: 4 }
+        ];
+
+        if (activityData.length === 0) {
+            alert('No data to chart');
+        } else {
+            // Set up graph
+            const graphWidth = canvas.width;
+            const graphHeight = canvas.height;
+            const padding = 50;
+            const maxHours = Math.max(...activityData.map(d => d.hours));
+            const barWidth = (graphWidth - padding * 2) / activityData.length;
+
+            // Draw title
+            ctx.font = '20px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Activity Hours Over Time', graphWidth / 2, padding / 2);
+
+            // Draw axes
+            ctx.beginPath();
+            ctx.moveTo(padding, padding);
+            ctx.lineTo(padding, graphHeight - padding);
+            ctx.lineTo(graphWidth - padding, graphHeight - padding);
+            ctx.stroke();
+
+            // Draw labels and tick marks
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= maxHours; i++) {
+                const y = graphHeight - padding - (i / maxHours) * (graphHeight - padding * 2);
+                ctx.fillText(i, padding - 10, y);
+                ctx.beginPath();
+                ctx.moveTo(padding - 5, y);
+                ctx.lineTo(padding, y);
+                ctx.stroke();
+            }
+
+            // Draw bars
+            ctx.fillStyle = '#00AEEF';
+            activityData.forEach((data, index) => {
+                const x = padding + index * barWidth;
+                const y = graphHeight - padding - (data.hours / maxHours) * (graphHeight - padding * 2);
+                const height = (data.hours / maxHours) * (graphHeight - padding * 2);
+                ctx.fillRect(x, y, barWidth - 10, height);
+
+                // Draw dates
+                ctx.textAlign = 'center';
+                ctx.fillText(data.date, x + barWidth / 2 - 5, graphHeight - padding + 20);
+            });
+        }
+
+        // Resize canvas for smaller screens
+        window.addEventListener('resize', () => {
+            const newWidth = window.innerWidth < 900 ? window.innerWidth - 100 : 800;
+            canvas.width = newWidth;
+            canvas.height = 400;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Redraw the graph here as per the new dimensions
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>User Information</h1>
+        <nav>
+            <a href="about.html">About</a>
+            <a href="menu.html">Menu</a>
+        </nav>
+    </header>
+    <main>
+        <form id="user-info-form">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required><br>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required><br>
+            <label for="birthdate">Birthdate:</label>
+            <input type="date" id="birthdate" name="birthdate" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="userPassword" name="password" required><br>
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" required><br>
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select><br>
+            <button type="button" onclick="updateUserInfo()">Update</button>
+        </form>
+        <p id="updateMessage"></p>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        canvas {
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>About</h1>
+    <canvas id="myCanvas" width="200" height="200"></canvas>
+    <p>This week's project involved creating a main menu, an activity log, and an activity graph. The most challenging part was setting up the graph using canvas, but it was exciting to learn about drawing and animating shapes using JavaScript.</p>
+    <p>Name: Ethan Geyer</p>
+
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#FF0000';
+        ctx.beginPath();
+        ctx.arc(100, 100, 50, 0, Math.PI * 2);
+        ctx.fill();
+    </script>
+</body>
+</html>
